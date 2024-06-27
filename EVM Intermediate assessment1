@@ -1,0 +1,45 @@
+// SPDX-License-Identifier: MIT
+pragma solidity ^0.8.7;
+
+contract MyContract {
+    address private owner;
+    uint private balance;
+
+    constructor() {
+        owner = msg.sender;
+        balance = 0;
+    }
+
+    function deposit(uint amount) public {
+        require(msg.sender == owner, "Only the owner can deposit funds");
+        require(amount > 0, "Invalid amount");
+        balance += amount;
+    }
+
+    function withdraw(uint amount) public {
+        require(msg.sender == owner, "Only the owner can withdraw funds");
+        require(amount > 0, "Invalid amount");
+        require(amount <= balance, "Insufficient balance");
+        balance -= amount;
+    }
+
+    function getBalance() public view returns (uint) {
+        return balance;
+    }
+
+    function checkOwner() public view {
+        assert(msg.sender == owner);
+    }
+
+     // Function to trigger an assert statement (used for internal errors)
+    function triggerAssert() external view {
+        assert(balance == 0);
+    }
+
+    // Function to trigger a revert statement (used for complex conditions)
+    function triggerRevert(uint256 amount) external pure {
+        if (amount > 100) {
+            revert("Amount exceeds the limit of 100");
+        }
+    }
+}
