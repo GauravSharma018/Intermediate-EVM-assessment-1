@@ -1,5 +1,5 @@
 # Intermediate-EVM-assessment-1
-This program is a simple contract written in Solidity. The smart contract that implements the require(), assert() and revert() statements.
+This program is a simple contract written in Solidity. This smart contract implements the require(), assert() and revert() statements.
 
 # Description
 This program is a simple contract written in Solidity, a programming language used for developing smart contracts on the Ethereum blockchain. The contract has the following functions :-
