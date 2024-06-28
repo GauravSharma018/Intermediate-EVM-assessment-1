@@ -23,7 +23,7 @@ To run this program, you can use Remix, an online Solidity IDE. To get started, 
 
 ## Executing te Program
 Once you are on the Remix website, create a new file by clicking on the "+" icon in the left-hand sidebar. Save the file with a .sol extension (e.g., HelloWorld.sol). Copy and paste the code from contract.sol file into your file:
-''' ruby
+```ruby
 // SPDX-License-Identifier: MIT
 pragma solidity ^0.8.7;
 
@@ -61,7 +61,7 @@ contract MyContract {
         }
     }
 }
-'''
+```
 
 To compile the code, click on the "Solidity Compiler" tab in the left-hand sidebar. Make sure the "Compiler" option is set to latest solidity version (or another compatible version), and then click on the "Compile" button.
 
