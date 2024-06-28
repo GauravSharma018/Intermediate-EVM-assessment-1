@@ -35,24 +35,3 @@ contract MyContract {
         }
     }
 }
-
-    function getBalance() public view returns (uint) {
-        return balance;
-    }
-
-    function checkOwner() public view {
-        assert(msg.sender == owner);
-    }
-
-     // Function to trigger an assert statement (used for internal errors)
-    function triggerAssert() external view {
-        assert(balance == 0);
-    }
-
-    // Function to trigger a revert statement (used for complex conditions)
-    function triggerRevert(uint256 amount) external pure {
-        if (amount > 100) {
-            revert("Amount exceeds the limit of 100");
-        }
-    }
-}
