@@ -2,8 +2,8 @@
 pragma solidity ^0.8.7;
 
 contract MyContract {
-    address private owner;
-    uint private balance;
+    address public owner;
+    uint public balance;
 
     constructor() {
         owner = msg.sender;
@@ -22,6 +22,19 @@ contract MyContract {
         require(amount <= balance, "Insufficient balance");
         balance -= amount;
     }
+
+     // Function to trigger an assert statement (used for internal errors)
+    function triggerAssert() external view {
+        assert(balance > 100);
+    }
+
+    // Function to trigger a revert statement (used for complex conditions)
+    function triggerRevert(uint256 amount) external pure {
+        if (amount > 100) {
+            revert("Amount exceeds the limit of 100");
+        }
+    }
+}
 
     function getBalance() public view returns (uint) {
         return balance;
