@@ -27,7 +27,7 @@ Once you are on the Remix website, create a new file by clicking on the "+" icon
 // SPDX-License-Identifier: MIT
 pragma solidity ^0.8.7;
 
-contract MyContract {
+contract MyErrorHandlingContract {
     address public owner;
     uint public balance;
 
@@ -67,7 +67,7 @@ To compile the code, click on the "Solidity Compiler" tab in the left-hand sideb
 
 Once the code is compiled, you can deploy the contract by clicking on the "Deploy & Run Transactions" tab in the left-hand sidebar. Select the your contract from the dropdown menu, and then click on the "Deploy" button.
 
-Once the contract is deployed, you can interact with it by calling the requireInstance, assertInstance and revertInstance function.
+Once the contract is deployed, you can interact with it by calling the  deposit(), withdraw(), triggerAssert() and  triggerRevert() functions.
 
 # Author
 Gaurav Sharma
