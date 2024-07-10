@@ -29,35 +29,29 @@ pragma solidity ^0.8.7;
 
 contract MyErrorHandlingContract {
     address public owner;
-    uint public balance;
+    uint256 public value;
 
     constructor() {
         owner = msg.sender;
-        balance = 0;
     }
 
-    function deposit(uint amount) public {
-        require(msg.sender == owner, "Only the owner can deposit funds");
-        require(amount > 0, "Invalid amount");
-        balance += amount;
+    modifier onlyOwner() {
+        require(msg.sender == owner, "Only the owner can call this function");
+        _;
     }
 
-    function withdraw(uint amount) public {
-        require(msg.sender == owner, "Only the owner can withdraw funds");
-        require(amount > 0, "Invalid amount");
-        require(amount <= balance, "Insufficient balance");
-        balance -= amount;
-    }
+    function setValue(uint256 _newValue) external onlyOwner {
+        // Use require for input validation
+        require(_newValue > 0, "Value must be greater than zero");
 
-     // Function to trigger an assert statement (used for internal errors)
-    function triggerAssert() external view {
-        assert(balance > 100);
-    }
+        // Use assert for internal errors (e.g., overflow)
+        uint256 oldValue = value;
+        value += _newValue;
+        assert(value > oldValue);
 
-    // Function to trigger a revert statement (used for complex conditions)
-    function triggerRevert(uint256 amount) external pure {
-        if (amount > 100) {
-            revert("Amount exceeds the limit of 100");
+        // Simulate a business logic error
+        if (_newValue == 111) {
+            revert("Oops! The value 111 is not allowed.");
         }
     }
 }
@@ -67,10 +61,10 @@ To compile the code, click on the "Solidity Compiler" tab in the left-hand sideb
 
 Once the code is compiled, you can deploy the contract by clicking on the "Deploy & Run Transactions" tab in the left-hand sidebar. Select the your contract from the dropdown menu, and then click on the "Deploy" button.
 
-Once the contract is deployed, you can interact with it by calling the  deposit(), withdraw(), triggerAssert() and  triggerRevert() functions.
+Once the contract is deployed, you can interact with it by calling the  setValue() function.
 
 # Author
 Gaurav Sharma
 
 # Licence
-This project is licensed under the MIT License - see the LICENSE.md file for details
+This project is licensed under the MIT License.
