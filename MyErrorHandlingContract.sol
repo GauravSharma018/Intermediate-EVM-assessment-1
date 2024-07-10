@@ -3,35 +3,29 @@ pragma solidity ^0.8.7;
 
 contract MyErrorHandlingContract {
     address public owner;
-    uint public balance;
+    uint256 public value;
 
     constructor() {
         owner = msg.sender;
-        balance = 0;
     }
 
-    function deposit(uint amount) public {
-        require(msg.sender == owner, "Only the owner can deposit funds");
-        require(amount > 0, "Invalid amount");
-        balance += amount;
+    modifier onlyOwner() {
+        require(msg.sender == owner, "Only the owner can call this function");
+        _;
     }
 
-    function withdraw(uint amount) public {
-        require(msg.sender == owner, "Only the owner can withdraw funds");
-        require(amount > 0, "Invalid amount");
-        require(amount <= balance, "Insufficient balance");
-        balance -= amount;
-    }
+    function setValue(uint256 _newValue) external onlyOwner {
+        // Use require for input validation
+        require(_newValue > 0, "Value must be greater than zero");
 
-     // Function to trigger an assert statement (used for internal errors)
-    function triggerAssert() external view {
-        assert(balance > 100);
-    }
+        // Use assert for internal errors (e.g., overflow)
+        uint256 oldValue = value;
+        value += _newValue;
+        assert(value > oldValue);
 
-    // Function to trigger a revert statement (used for complex conditions)
-    function triggerRevert(uint256 amount) external pure {
-        if (amount > 100) {
-            revert("Amount exceeds the limit of 100");
+        // Simulate a business logic error
+        if (_newValue == 111) {
+            revert("Oops! The value 111 is not allowed.");
         }
     }
 }
